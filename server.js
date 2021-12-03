@@ -12,4 +12,4 @@ app.prepare().then(() => {
     if (error) throw error;
     console.log('Server started successfully on localhost:3000')
   });
-})
+});

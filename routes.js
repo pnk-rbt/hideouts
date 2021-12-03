@@ -1,12 +1,10 @@
 const routes = require('next-routes')();
 
-// redirect any /campaign/:address to instead render
-// the /campaign/show address. this overrides the
+// redirect any /hideout/:address to instead render
+// the /hideout/show address. this overrides the
 // default next js routing system
 routes
-  .add('/campaign/new', '/campaign/new')
-  .add('/campaign/:address', '/campaign/show')
-  .add('/campaign/:address/requests', '/campaign/requests/index')
-  .add('/campaign/:address/requests/new', '/campaign/requests/new');
+  .add('/hideout/new', '/hideout/new')
+  .add('/hideout/:address', '/hideout/show')
 
 module.exports = routes;

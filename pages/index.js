@@ -4,23 +4,23 @@ import { Link } from '../routes';
 import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
 
-export default class CampaignIndex extends Component {
+export default class HideoutsIndex extends Component {
   // getInitialProps is next's equivalent to componentDidMount
   // it's a custom lifecycle method to avoid issues
   // related to next using server-side rendering
   // instead of client-side rendering like normal react
   static async getInitialProps() {
-    const campaignAddresses = await factory.methods.getDeployedCampaigns().call();
-    return { campaignAddresses };
+    const hideouts = await factory.methods.getHideouts().call();
+    return { hideouts };
   }
 
-  renderCampaigns() {
-    const items = this.props.campaignAddresses.map(address => {
+  renderHideouts() {
+    const items = this.props.hideouts.map(address => {
       return {
         header: address,
         description: (
-          <Link route={`/campaign/${address}`}>
-            <a>View Campaign</a>
+          <Link route={`/hideout/${address}`}>
+            <a>View Hideout</a>
           </Link>),
         fluid: true
       };
@@ -32,17 +32,17 @@ export default class CampaignIndex extends Component {
   render() {
     return (
       <Layout>
-        <Link route='/campaign/new'>
+        <Link route='/hideout/new'>
           <a>
             <Button 
-              content="Create a Campaign"
+              content="Create a new Hideout"
               floated="right"
               icon="add"
               primary
             />
           </a>
         </Link>
-        {this.renderCampaigns()}
+        {this.renderHideouts()}
       </Layout>
     );
   }

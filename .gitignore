@@ -1,2 +1,5 @@
-node_modules
+.next
 config.js
+ethereum/build/
+node_modules
+package-lock.json

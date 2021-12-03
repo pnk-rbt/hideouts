@@ -5,15 +5,9 @@ const fs = require("fs-extra");
 const buildPath = path.resolve(__dirname, "build");
 fs.removeSync(buildPath);
 
-const campaignPath = path.resolve(__dirname, "contracts", "Campaign.sol");
-console.log(campaignPath);
-const source = fs.readFileSync(campaignPath, "utf8");
-console.log(source);
-
+const contractPath = path.resolve(__dirname, "contracts", "Hideout.sol");
+const source = fs.readFileSync(contractPath, "utf8");
 const output = solc.compile(source, 1).contracts;
-
-// console.log(output);
-
 fs.ensureDirSync(buildPath);
 
 for (let contract in output) {
@@ -21,5 +15,4 @@ for (let contract in output) {
     path.resolve(buildPath, contract.replace(":", "") + ".json"),
     output[contract]
   );
-  console.log('did it');
 }

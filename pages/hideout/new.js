@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Layout from '../../components/Layout';
-import { Container, Form, Input, Message } from 'semantic-ui-react'
+import { Container, Form, Message } from 'semantic-ui-react'
 
 import web3 from '../../ethereum/web3';
 import factory from '../../ethereum/factory';
 import { Router } from '../../routes';
  
-export default class CampaignNew extends Component {
+export default class HideoutNew extends Component {
   state = {
-    errorMessage: '',
-    minimumContribution: ''
+    errorMessage: ''
   };
 
   onSubmit = async (event) => {
@@ -20,7 +19,7 @@ export default class CampaignNew extends Component {
       const accounts = await web3.eth.getAccounts();
 
       await factory.methods
-        .createCampaign(this.state.minimumContribution)
+        .createHideout()
         .send({
           from: accounts[0]
         });
@@ -35,39 +34,27 @@ export default class CampaignNew extends Component {
 
   onChange = (event) => {
     this.setState({
-      errorMessage: '',
-      minimumContribution: event.target.value
+      errorMessage: ''
     });
   };
 
   render() {
     const {
       errorMessage,
-      loading,
-      minimumContribution
+      loading
     } = this.state;
 
     return (
       <Layout>
         <Container text>
-          Create a Campaign
+          Generate a new Hideout
           <Form error={ !!errorMessage } onSubmit={ this.onSubmit }>
-            <Form.Field>
-              <label>Minimum contribution:</label>
-              <Input
-                label='wei'
-                labelPosition='right'
-                placeholder='100'
-                value={ minimumContribution }
-                onChange={ this.onChange }
-              />
-            </Form.Field>
-            <Message error header='Oops!' content={ errorMessage }
-            />
+            <Message error header='Oops!' content={ errorMessage } />
             <Form.Button
               content='Create'
               loading={ loading }
-              primary />
+              primary
+            />
           </Form>
         </Container>
       </Layout>
